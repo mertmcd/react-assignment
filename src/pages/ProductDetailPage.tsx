@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import axios from "axios";
 import { Product, Review } from "../types/product";
 import ImageSlider from "../components/ImageSlider";
 import Tabs from "../components/ProductDetailTabs";
-//import { AxiosInstance } from "../api/axios";
+import { fetchProduct } from "../api";
 
 const ProductDetailPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -13,14 +12,18 @@ const ProductDetailPage: React.FC = () => {
   const [reviews, setReviews] = useState<Review[]>([]);
 
   useEffect(() => {
-    const fetchProduct = async () => {
-      const response = await axios.get(`https://dummyjson.com/products/${id}`);
-      setProduct(response.data);
-      setReviews(response.data.reviews);
+    const fetchProductDetail = async (): Promise<void> => {
+      if (id) {
+        const product = await fetchProduct(id);
+        setProduct(product);
+        setReviews(product.reviews);
+      } else {
+        console.error("Product ID is undefined");
+      }
     };
 
-    fetchProduct();
-  }, [id]);
+    fetchProductDetail();
+  });
 
   if (!product) {
     return <div className="text-center text-white text-xl">Loading...</div>;

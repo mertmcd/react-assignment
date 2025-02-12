@@ -16,7 +16,8 @@ const LoginPage: React.FC = () => {
     if (username === "user" && password === "user123") {
       const payload = {
         username: "user",
-        exp: Date.now() + 1000 * 60 * 60, // 1 hour
+        // create 15 min expiration for testing purposes
+        exp: Date.now() + 15 * 60 * 1000,
       };
 
       const mockToken: string = createMockJwtToken(payload);

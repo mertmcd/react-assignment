@@ -1,24 +1,30 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { Product } from "../types/product";
-import axios from "axios";
+import Pagination from "../components/Pagination";
+import { fetchProducts } from "../api";
 
 const ProductListPage: React.FC = () => {
   const [products, setProducts] = useState<Product[]>([]);
+  const [totalPages, setTotalPages] = useState<number>(0);
   const navigate = useNavigate();
+  const limit = 20;
+  const [searchParams, setSearchParams] = useSearchParams();
+  const currentPage = Number(searchParams.get("page")) || 1;
 
   useEffect(() => {
-    const fetchProducts = async (): Promise<void> => {
-      try {
-        const response = await axios.get("https://dummyjson.com/products");
-        setProducts(response.data.products);
-      } catch (error) {
-        console.error("Error fetching products:", error);
-      }
+    const fetch = async (): Promise<void> => {
+      const data = await fetchProducts(currentPage, limit);
+      setProducts(data.products);
+      setTotalPages(Math.ceil(data.total / limit));
     };
 
-    fetchProducts();
-  }, []);
+    fetch();
+  }, [currentPage]);
+
+  const handlePageChange = (newPage: number) => {
+    setSearchParams({ page: newPage.toString() });
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-r from-blue-500 to-purple-600 py-8">
@@ -57,6 +63,11 @@ const ProductListPage: React.FC = () => {
             </div>
           ))}
         </div>
+        <Pagination
+          currentPage={currentPage}
+          totalPages={totalPages}
+          onPageChange={handlePageChange}
+        />
       </div>
     </div>
   );
