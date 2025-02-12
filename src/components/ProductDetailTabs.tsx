@@ -1,8 +1,8 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { TabsProps } from "../types/tabs";
 
 const Tabs: React.FC<TabsProps> = ({ tabs }) => {
-  const [activeIndex, setActiveIndex] = useState(0);
+  const [activeIndex, setActiveIndex] = useState<number>(0);
 
   useEffect(() => {
     if (activeIndex >= tabs.length) {
@@ -31,8 +31,7 @@ const Tabs: React.FC<TabsProps> = ({ tabs }) => {
           </button>
         ))}
       </div>
-
-      {tabs.length > 0 && <div>{tabs[activeIndex]?.content}</div>}
+      {tabs[activeIndex] && <div>{tabs[activeIndex].content}</div>}{" "}
     </div>
   );
 };

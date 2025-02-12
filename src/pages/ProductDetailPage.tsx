@@ -4,6 +4,7 @@ import axios from "axios";
 import { Product, Review } from "../types/product";
 import ImageSlider from "../components/ImageSlider";
 import Tabs from "../components/ProductDetailTabs";
+//import { AxiosInstance } from "../api/axios";
 
 const ProductDetailPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();

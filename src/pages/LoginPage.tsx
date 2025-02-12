@@ -4,12 +4,12 @@ import { useAuth } from "../contexts/AuthContext";
 import { createMockJwtToken } from "../helpers/authHelper";
 
 const LoginPage: React.FC = () => {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+  const [username, setUsername] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
   const { login } = useAuth();
   const navigate = useNavigate();
 
-  const handleLogin = async (e: React.FormEvent) => {
+  const handleLogin = async (e: React.FormEvent): Promise<void> => {
     e.preventDefault();
 
     // Default user and password
@@ -19,7 +19,7 @@ const LoginPage: React.FC = () => {
         exp: Date.now() + 1000 * 60 * 60, // 1 hour
       };
 
-      const mockToken = createMockJwtToken(payload);
+      const mockToken: string = createMockJwtToken(payload);
 
       localStorage.setItem("token", mockToken);
 
@@ -50,7 +50,7 @@ const LoginPage: React.FC = () => {
               id="username"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
-              placeholder="Enter your username"
+              placeholder=""
               className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
               required
             />
@@ -67,7 +67,7 @@ const LoginPage: React.FC = () => {
               id="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              placeholder="Enter your password"
+              placeholder=""
               className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
               required
             />

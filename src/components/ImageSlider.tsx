@@ -1,17 +1,17 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { ImageSliderProps } from "../types/imageSlider";
 
 const ImageSlider: React.FC<ImageSliderProps> = ({ images }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  const prevSlide = () => {
-    setCurrentIndex((prevIndex) =>
+  const prevSlide = (): void => {
+    setCurrentIndex((prevIndex: number) =>
       prevIndex === 0 ? images.length - 1 : prevIndex - 1
     );
   };
 
-  const nextSlide = () => {
-    setCurrentIndex((prevIndex) =>
+  const nextSlide = (): void => {
+    setCurrentIndex((prevIndex: number) =>
       prevIndex === images.length - 1 ? 0 : prevIndex + 1
     );
   };

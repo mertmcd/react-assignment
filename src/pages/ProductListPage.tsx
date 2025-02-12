@@ -8,7 +8,7 @@ const ProductListPage: React.FC = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const fetchProducts = async () => {
+    const fetchProducts = async (): Promise<void> => {
       try {
         const response = await axios.get("https://dummyjson.com/products");
         setProducts(response.data.products);
