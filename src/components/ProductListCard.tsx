@@ -14,7 +14,7 @@ const ProductListCard: React.FC<ProductListCardProps> = ({ product }) => {
   return (
     <div
       onClick={() => navigate(`/product/${product.id}`)}
-      className="bg-white rounded-lg border border-gray-200 shadow-lg overflow-hidden transform transition-transform duration-200 hover:scale-105 cursor-pointer hover:shadow-2xl hover:border-gray-300"
+      className="bg-transparent rounded-lg border border-gray-200 shadow-lg overflow-hidden transform transition-transform duration-200 hover:scale-105 cursor-pointer hover:shadow-2xl hover:border-gray-300"
     >
       {isLoading && <SkeletonLoader />}
 
@@ -22,7 +22,7 @@ const ProductListCard: React.FC<ProductListCardProps> = ({ product }) => {
         src={product.thumbnail}
         alt={product.title}
         loading="lazy"
-        className={`w-full h-48 object-cover transition-opacity duration-300 ${
+        className={`w-full h-48 object-contain transition-opacity duration-300 ${
           isLoading ? "opacity-0" : "opacity-100"
         }`}
         onLoad={() => setIsLoading(false)}

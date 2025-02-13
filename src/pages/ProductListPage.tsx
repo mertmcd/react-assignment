@@ -34,7 +34,7 @@ const ProductListPage: React.FC = () => {
   return (
     <div className="min-h-screen bg-white py-8">
       <div className="container mx-auto px-4">
-        <h1 className="text-4xl font-extrabold text-gray-900 mb-8">
+        <h1 className="text-3xl leading-3 font-extrabold text-gray-900 mb-8">
           Product List
         </h1>
 

@@ -2,12 +2,17 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
 import { createMockJwtToken } from "../helpers/authHelper";
+import Notification from "../components/Notification";
+import { NotificationProps } from "../types/notificationMessage";
 
 const LoginPage: React.FC = () => {
   const [username, setUsername] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const { login } = useAuth();
   const navigate = useNavigate();
+  const [notification, setNotification] = useState<NotificationProps | null>(
+    null
+  );
 
   const handleLogin = async (e: React.FormEvent): Promise<void> => {
     e.preventDefault();
@@ -28,7 +33,14 @@ const LoginPage: React.FC = () => {
 
       navigate("/products");
     } else {
-      alert("Invalid username or password");
+      setNotification({
+        message: "Invalid username or password",
+        type: "error",
+        duration: 3000,
+        onClose: () => {
+          setNotification(null);
+        },
+      });
     }
   };
 
@@ -36,6 +48,14 @@ const LoginPage: React.FC = () => {
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-blue-500 to-purple-600">
       <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
         <h1 className="text-3xl font-bold text-center text-gray-800 mb-6">
+          {notification && (
+            <Notification
+              message={notification.message}
+              type={notification.type}
+              duration={notification.duration ?? 3000}
+              onClose={() => setNotification(null)}
+            />
+          )}
           Login
         </h1>
         <form onSubmit={handleLogin} className="space-y-6">
