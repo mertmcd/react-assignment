@@ -1,5 +1,7 @@
 import { useState } from "react";
-import { ImageSliderProps } from "../types/imageSlider";
+interface ImageSliderProps {
+  images: string[];
+}
 
 const ImageSlider: React.FC<ImageSliderProps> = ({ images }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
