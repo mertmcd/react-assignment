@@ -14,7 +14,7 @@ const ProductListCard: React.FC<ProductListCardProps> = ({ product }) => {
   return (
     <div
       onClick={() => navigate(`/product/${product.id}`)}
-      className="bg-white rounded-lg shadow-lg overflow-hidden transform transition-transform duration-200 hover:scale-105 cursor-pointer"
+      className="bg-white rounded-lg border border-gray-200 shadow-lg overflow-hidden transform transition-transform duration-200 hover:scale-105 cursor-pointer hover:shadow-2xl hover:border-gray-300"
     >
       {isLoading && <SkeletonLoader />}
 
@@ -29,7 +29,7 @@ const ProductListCard: React.FC<ProductListCardProps> = ({ product }) => {
       />
 
       <div className="p-4">
-        <h2 className="text-xl font-semibold text-gray-800 mb-2">
+        <h2 className="text-xl font-semibold text-gray-900 mb-2">
           {product.title}
         </h2>
         <p className="text-lg font-bold text-blue-600 mb-2">

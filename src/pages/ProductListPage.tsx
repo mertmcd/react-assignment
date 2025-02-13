@@ -28,12 +28,13 @@ const ProductListPage: React.FC = () => {
 
   const handlePageChange = (newPage: number) => {
     setSearchParams({ page: newPage.toString() });
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-r from-blue-500 to-purple-600 py-8">
+    <div className="min-h-screen bg-white py-8">
       <div className="container mx-auto px-4">
-        <h1 className="text-3xl font-bold text-center text-white mb-8">
+        <h1 className="text-4xl font-extrabold text-gray-900 mb-8">
           Product List
         </h1>
 
@@ -42,12 +43,13 @@ const ProductListPage: React.FC = () => {
             <Spinner />
           </div>
         ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
             {products.map((product) => (
               <ProductListCard key={product.id} product={product} />
             ))}
           </div>
         )}
+
         {!loading && (
           <Pagination
             currentPage={currentPage}
