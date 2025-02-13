@@ -5,6 +5,8 @@ import Tabs from "./ProductDetailTabs";
 import ProductInfo from "./ProductInfo";
 import ProductReviews from "./ProductReviews";
 import Spinner from "./Spinner";
+import { RootState } from "../store";
+import { useSelector } from "react-redux";
 
 interface ProductDetailCardProps {
   product: Product;
@@ -16,11 +18,13 @@ const ProductDetailCard: React.FC<ProductDetailCardProps> = ({
   reviews,
 }) => {
   const [loadingImage, setLoadingImage] = useState(true);
-  const [reviewsLength, setReviewsLength] = useState<number>(reviews.length);
+  const storeReviews = useSelector((state: RootState) => state.review.reviews);
 
-  const handleUpdatedReviews = (updatedReviews: Review[]) => {
-    setReviewsLength(updatedReviews.length);
-  };
+  const matchedReviews = storeReviews.filter(
+    (review) => review.id === product.id
+  );
+
+  const totalReviewsCount = matchedReviews.length + reviews.length;
 
   const tabs = [
     {
@@ -28,13 +32,8 @@ const ProductDetailCard: React.FC<ProductDetailCardProps> = ({
       content: <ProductInfo product={product} />,
     },
     {
-      label: `Reviews (${reviewsLength})`,
-      content: (
-        <ProductReviews
-          reviews={reviews}
-          onUpdatedReviews={handleUpdatedReviews}
-        />
-      ),
+      label: `Reviews (${totalReviewsCount})`,
+      content: <ProductReviews reviews={reviews} />,
     },
   ];
 

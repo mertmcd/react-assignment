@@ -4,7 +4,7 @@ export interface Product {
   description?: string;
   price: number;
   rating: number;
-  reviews?: string[];
+  reviews: object[];
   thumbnail?: string;
   images?: string[];
   stock: number;
@@ -32,5 +32,5 @@ export interface Review {
   rating: number;
   comment: string;
   date: string;
-  id: string;
+  id: number;
 }

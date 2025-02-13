@@ -2,50 +2,26 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { Review } from "../types/product";
 import AddReview from "./AddReview";
-
+import { RootState } from "../store";
+import { useSelector } from "react-redux";
 interface ProductReviewsProps {
   reviews: Review[];
-  onUpdatedReviews: (reviews: Review[]) => void;
 }
 
-const ProductReviews: React.FC<ProductReviewsProps> = ({
-  reviews,
-  onUpdatedReviews,
-}) => {
+const ProductReviews: React.FC<ProductReviewsProps> = ({ reviews }) => {
   const { id } = useParams<{ id: string }>();
+  const productId = parseInt(id || "0");
   const [allReviews, setAllReviews] = useState<Review[]>([]);
+  const storeReviews = useSelector((state: RootState) => state.review.reviews);
 
   useEffect(() => {
     if (!id) return;
-
-    const storedReviews = localStorage.getItem("reviews");
-    const parsedReviews: Review[] = storedReviews
-      ? JSON.parse(storedReviews)
-      : [];
-
-    const matchedReviews = parsedReviews.filter((review) => review.id === id);
-
+    const matchedReviews = storeReviews.filter(
+      (review) => review.id === productId
+    );
     const updatedReviews = [...reviews, ...matchedReviews];
-    onUpdatedReviews(updatedReviews);
-
     setAllReviews(updatedReviews);
-  }, [reviews, id, onUpdatedReviews]);
-
-  const handleReviewSubmit = (newReview: Review) => {
-    if (!id) return;
-
-    const storedReviews = localStorage.getItem("reviews") ?? "[]";
-    const parsedReviews: Review[] = storedReviews
-      ? JSON.parse(storedReviews)
-      : [];
-
-    const updatedReviews = [...parsedReviews, newReview];
-    localStorage.setItem("reviews", JSON.stringify(updatedReviews));
-
-    onUpdatedReviews(updatedReviews);
-
-    setAllReviews([...allReviews, newReview]);
-  };
+  }, [id, reviews, storeReviews]);
 
   return (
     <div className="space-y-8">
@@ -62,7 +38,7 @@ const ProductReviews: React.FC<ProductReviewsProps> = ({
           <p className="text-gray-600 mt-2">{review.comment}</p>
         </div>
       ))}
-      <AddReview onReviewSubmit={handleReviewSubmit} id={id ?? ""} />
+      <AddReview id={productId} />
     </div>
   );
 };

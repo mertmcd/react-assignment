@@ -1,14 +1,12 @@
 import { useState } from "react";
 import { Review } from "../types/product";
-import { useParams } from "react-router-dom";
-
+import { useDispatch } from "react-redux";
+import { addReview } from "../features/reviewSlicer";
 interface AddReviewProps {
-  onReviewSubmit: (review: Review) => void;
-  id: string;
+  id: number;
 }
 
-const AddReview: React.FC<AddReviewProps> = ({ onReviewSubmit }) => {
-  const { id = "" } = useParams<{ id: string }>() || { id: "" };
+const AddReview: React.FC<AddReviewProps> = ({ id }) => {
   const [review, setReview] = useState<Review>({
     reviewerName: "",
     rating: 1,
@@ -17,20 +15,20 @@ const AddReview: React.FC<AddReviewProps> = ({ onReviewSubmit }) => {
     id: id,
   });
 
+  const dispatch = useDispatch();
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (onReviewSubmit) {
-      onReviewSubmit(review);
-      setReview({
-        reviewerName: "",
-        rating: 1,
-        comment: "",
-        date: new Date().toISOString(),
-        id: id,
-      });
-    } else {
-      console.error("onReviewSubmit function is not passed correctly.");
-    }
+
+    dispatch(addReview(review));
+
+    setReview({
+      reviewerName: "",
+      rating: 1,
+      comment: "",
+      date: new Date().toISOString(),
+      id: id,
+    });
   };
 
   return (
