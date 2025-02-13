@@ -7,7 +7,7 @@ import ProductReviews from "./ProductReviews";
 import Spinner from "./Spinner";
 import { RootState } from "../store";
 import { useSelector } from "react-redux";
-
+import { selectReviewsByProductId } from "../features/reviewSlicer";
 interface ProductDetailCardProps {
   product: Product;
   reviews: Review[];
@@ -18,13 +18,10 @@ const ProductDetailCard: React.FC<ProductDetailCardProps> = ({
   reviews,
 }) => {
   const [loadingImage, setLoadingImage] = useState(true);
-  const storeReviews = useSelector((state: RootState) => state.review.reviews);
-
-  const matchedReviews = storeReviews.filter(
-    (review) => review.id === product.id
+  const storeReviews = useSelector((state: RootState) =>
+    selectReviewsByProductId(state, product.id)
   );
-
-  const totalReviewsCount = matchedReviews.length + reviews.length;
+  const totalReviewsCount = storeReviews.length + reviews.length;
 
   const tabs = [
     {

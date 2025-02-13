@@ -1,9 +1,9 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, createSelector } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 import type { Review } from "../types/product";
 
 const storage = localStorage.getItem("reviews");
-export interface ReviewState {
+interface ReviewState {
   reviews: Review[];
 }
 
@@ -22,5 +22,10 @@ export const reviewSlice = createSlice({
   },
 });
 
+export const selectReviewsByProductId = createSelector(
+  (state: { review: ReviewState }) => state.review.reviews,
+  (_: unknown, productId: number) => productId,
+  (reviews, productId) => reviews.filter((review) => review.id === productId)
+);
+
 export const { addReview } = reviewSlice.actions;
-export default reviewSlice.reducer;

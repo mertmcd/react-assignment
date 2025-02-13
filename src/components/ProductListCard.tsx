@@ -4,6 +4,7 @@ import { Product } from "../types/product";
 import SkeletonLoader from "./SkeletonLoader";
 import { RootState } from "../store";
 import { useSelector } from "react-redux";
+import { selectReviewsByProductId } from "../features/reviewSlicer";
 
 interface ProductListCardProps {
   product: Product;
@@ -12,13 +13,10 @@ interface ProductListCardProps {
 const ProductListCard: React.FC<ProductListCardProps> = ({ product }) => {
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(true);
-  const storeReviews = useSelector((state: RootState) => state.review.reviews);
-
-  const matchedReviews = storeReviews.filter(
-    (review) => review.id === product.id
+  const storeReviews = useSelector((state: RootState) =>
+    selectReviewsByProductId(state, product.id)
   );
-
-  const totalReviewsCount = matchedReviews.length + product.reviews.length;
+  const totalReviewsCount = storeReviews.length + product.reviews.length;
 
   return (
     <div

@@ -4,24 +4,25 @@ import { Review } from "../types/product";
 import AddReview from "./AddReview";
 import { RootState } from "../store";
 import { useSelector } from "react-redux";
+import { selectReviewsByProductId } from "../features/reviewSlicer";
+
 interface ProductReviewsProps {
   reviews: Review[];
 }
 
 const ProductReviews: React.FC<ProductReviewsProps> = ({ reviews }) => {
   const { id } = useParams<{ id: string }>();
-  const productId = parseInt(id || "0");
+  const productId = parseInt(id ?? "0");
   const [allReviews, setAllReviews] = useState<Review[]>([]);
-  const storeReviews = useSelector((state: RootState) => state.review.reviews);
+  const matchedReviews = useSelector((state: RootState) =>
+    selectReviewsByProductId(state, productId)
+  );
 
   useEffect(() => {
     if (!id) return;
-    const matchedReviews = storeReviews.filter(
-      (review) => review.id === productId
-    );
     const updatedReviews = [...reviews, ...matchedReviews];
     setAllReviews(updatedReviews);
-  }, [id, reviews, storeReviews]);
+  }, [id, reviews, matchedReviews]);
 
   return (
     <div className="space-y-8">
