@@ -1,5 +1,3 @@
-import React from "react";
-
 interface SkeletonLoaderProps {
   height?: string;
   width?: string;

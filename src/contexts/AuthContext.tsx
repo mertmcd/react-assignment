@@ -24,6 +24,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
         if (decodedPayload.exp < Date.now()) {
           localStorage.removeItem("token");
+          localStorage.removeItem("reviews");
           setIsAuthenticated(false);
         } else {
           setIsAuthenticated(true);
@@ -42,6 +43,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
   const logout = useCallback(() => {
     localStorage.removeItem("token");
+    localStorage.removeItem("reviews");
     setIsAuthenticated(false);
   }, []);
 

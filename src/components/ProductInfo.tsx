@@ -1,6 +1,4 @@
-import React from "react";
 import { Product } from "../types/product";
-
 interface ProductInfoProps {
   product: Product;
 }
