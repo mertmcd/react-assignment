@@ -36,12 +36,13 @@ const ProductDetailCard: React.FC<ProductDetailCardProps> = ({
         ← Back to Products
       </button>
 
-      {product.images && product.images.length > 0 ? (
+      {product.images && product.images.length > 1 ? (
         <ImageSlider images={product.images} />
       ) : (
         <img
           src={product.thumbnail}
           alt={product.title}
+          loading="lazy"
           className="w-full h-96 object-contain mb-6"
         />
       )}
