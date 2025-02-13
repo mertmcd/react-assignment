@@ -3,7 +3,6 @@ import { useParams, useNavigate } from "react-router-dom";
 import { Product, Review } from "../types/product";
 import { fetchProduct } from "../api";
 import ProductDetailCard from "../components/ProductDetailCard";
-import Spinner from "../components/Spinner";
 
 const ProductDetailPage: React.FC = () => {
   const { id } = useParams();
@@ -49,12 +48,6 @@ const ProductDetailPage: React.FC = () => {
         <h1 className="text-3xl font-bold text-gray-900 mb-8">
           {loading ? "Loading..." : ""}
         </h1>
-
-        {loading && (
-          <div className="flex justify-center items-center min-h-[60vh]">
-            <Spinner />
-          </div>
-        )}
         {!loading && product && (
           <ProductDetailCard product={product} reviews={reviews} />
         )}

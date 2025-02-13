@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Product, Review } from "../types/product";
 import ImageSlider from "./ImageSlider";
 import Tabs from "./ProductDetailTabs";
 import ProductInfo from "./ProductInfo";
 import ProductReviews from "./ProductReviews";
+import Spinner from "./Spinner";
 
 interface ProductDetailCardProps {
   product: Product;
@@ -14,6 +15,8 @@ const ProductDetailCard: React.FC<ProductDetailCardProps> = ({
   product,
   reviews,
 }) => {
+  const [loadingImage, setLoadingImage] = useState(true);
+
   const tabs = [
     {
       label: "Product Details",
@@ -25,15 +28,35 @@ const ProductDetailCard: React.FC<ProductDetailCardProps> = ({
     },
   ];
 
+  useEffect(() => {
+    const preloadImages = async () => {
+      if (product.images && product.images.length > 0) {
+        for (const src of product.images) {
+          const img = new Image();
+          img.src = src;
+          await new Promise<void>((resolve) => {
+            img.onload = () => resolve();
+          });
+        }
+        setLoadingImage(false);
+      }
+    };
+
+    preloadImages();
+  }, [product.images]);
+
   return (
     <div className="max-w-4xl mx-auto bg-white p-6 rounded-lg shadow-lg border border-gray-200">
-      {product.images && product.images.length > 1 ? (
+      {loadingImage ? (
+        <div className="w-full h-96 flex justify-center items-center mb-6">
+          <Spinner />
+        </div>
+      ) : product.images && product.images.length > 1 ? (
         <ImageSlider images={product.images} />
       ) : (
         <img
           src={product.thumbnail}
           alt={product.title}
-          loading="lazy"
           className="w-full h-96 object-contain mb-6"
         />
       )}
