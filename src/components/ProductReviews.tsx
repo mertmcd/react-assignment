@@ -5,9 +5,13 @@ import AddReview from "./AddReview";
 
 interface ProductReviewsProps {
   reviews: Review[];
+  onUpdatedReviews: (reviews: Review[]) => void;
 }
 
-const ProductReviews: React.FC<ProductReviewsProps> = ({ reviews }) => {
+const ProductReviews: React.FC<ProductReviewsProps> = ({
+  reviews,
+  onUpdatedReviews,
+}) => {
   const { id } = useParams<{ id: string }>();
   const [allReviews, setAllReviews] = useState<Review[]>([]);
 
@@ -22,9 +26,10 @@ const ProductReviews: React.FC<ProductReviewsProps> = ({ reviews }) => {
     const matchedReviews = parsedReviews.filter((review) => review.id === id);
 
     const updatedReviews = [...reviews, ...matchedReviews];
+    onUpdatedReviews(updatedReviews);
 
     setAllReviews(updatedReviews);
-  }, [reviews, id]);
+  }, [reviews, id, onUpdatedReviews]);
 
   const handleReviewSubmit = (newReview: Review) => {
     if (!id) return;
@@ -36,6 +41,8 @@ const ProductReviews: React.FC<ProductReviewsProps> = ({ reviews }) => {
 
     const updatedReviews = [...parsedReviews, newReview];
     localStorage.setItem("reviews", JSON.stringify(updatedReviews));
+
+    onUpdatedReviews(updatedReviews);
 
     setAllReviews([...allReviews, newReview]);
   };

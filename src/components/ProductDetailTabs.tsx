@@ -10,10 +10,6 @@ const Tabs: React.FC<TabsProps> = ({ tabs }) => {
     }
   }, [tabs, activeIndex]);
 
-  if (!tabs || tabs.length === 0) {
-    return <div className="text-gray-500">No tabs available</div>;
-  }
-
   return (
     <div>
       <div className="flex border-b border-gray-300 mb-6">

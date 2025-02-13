@@ -16,6 +16,11 @@ const ProductDetailCard: React.FC<ProductDetailCardProps> = ({
   reviews,
 }) => {
   const [loadingImage, setLoadingImage] = useState(true);
+  const [reviewsLength, setReviewsLength] = useState<number>(reviews.length);
+
+  const handleUpdatedReviews = (updatedReviews: Review[]) => {
+    setReviewsLength(updatedReviews.length);
+  };
 
   const tabs = [
     {
@@ -23,8 +28,13 @@ const ProductDetailCard: React.FC<ProductDetailCardProps> = ({
       content: <ProductInfo product={product} />,
     },
     {
-      label: `Reviews (${reviews.length})`,
-      content: <ProductReviews reviews={reviews} />,
+      label: `Reviews (${reviewsLength})`,
+      content: (
+        <ProductReviews
+          reviews={reviews}
+          onUpdatedReviews={handleUpdatedReviews}
+        />
+      ),
     },
   ];
 
