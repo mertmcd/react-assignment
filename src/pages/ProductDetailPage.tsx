@@ -40,8 +40,14 @@ const ProductDetailPage: React.FC = () => {
   return (
     <div className="min-h-screen bg-white py-8">
       <div className="container mx-auto px-4">
+        <button
+          onClick={() => navigate(-1)}
+          className="mb-4 px-6 py-2 text-gray-900 font-semibold rounded-lg"
+        >
+          ← Back to Products
+        </button>
         <h1 className="text-3xl font-bold text-gray-900 mb-8">
-          {loading ? "Loading..." : product?.title}
+          {loading ? "Loading..." : ""}
         </h1>
 
         {loading && (
@@ -50,14 +56,10 @@ const ProductDetailPage: React.FC = () => {
           </div>
         )}
         {!loading && product && (
-          <ProductDetailCard
-            product={product}
-            reviews={reviews}
-            onBack={() => navigate("/products")}
-          />
+          <ProductDetailCard product={product} reviews={reviews} />
         )}
         {!loading && !product && (
-          <div className="text-center text-white">Product not found</div>
+          <div className="text-center text-gray-900">Product not found</div>
         )}
       </div>
     </div>

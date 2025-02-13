@@ -8,13 +8,11 @@ import ProductReviews from "./ProductReviews";
 interface ProductDetailCardProps {
   product: Product;
   reviews: Review[];
-  onBack: () => void;
 }
 
 const ProductDetailCard: React.FC<ProductDetailCardProps> = ({
   product,
   reviews,
-  onBack,
 }) => {
   const tabs = [
     {
@@ -28,14 +26,7 @@ const ProductDetailCard: React.FC<ProductDetailCardProps> = ({
   ];
 
   return (
-    <div className="max-w-4xl mx-auto bg-white p-6 rounded-lg shadow-lg">
-      <button
-        onClick={onBack}
-        className="mb-4 px-6 py-2 bg-blue-500 text-white font-semibold rounded-lg shadow-md hover:bg-blue-600 transition duration-300"
-      >
-        ← Back to Products
-      </button>
-
+    <div className="max-w-4xl mx-auto bg-white p-6 rounded-lg shadow-lg border border-gray-200">
       {product.images && product.images.length > 1 ? (
         <ImageSlider images={product.images} />
       ) : (
