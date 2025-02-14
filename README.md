@@ -29,6 +29,12 @@ npm run dev
 http://localhost:5173
 ```
 
+## Run Tests
+
+```sh
+npm test
+```
+
 ## Project Structure
 
 - `src/` - Source code directory
