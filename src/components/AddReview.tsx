@@ -2,6 +2,8 @@ import { useState } from "react";
 import { Review } from "../types/product";
 import { useDispatch } from "react-redux";
 import { addReview } from "../features/reviewSlicer";
+import Notification from "./Notification";
+import { NotificationProps } from "../types/notificationMessage";
 interface AddReviewProps {
   id: number;
 }
@@ -14,6 +16,10 @@ const AddReview: React.FC<AddReviewProps> = ({ id }) => {
     date: new Date().toISOString(),
     id: id,
   });
+
+  const [notification, setNotification] = useState<NotificationProps | null>(
+    null
+  );
 
   const dispatch = useDispatch();
 
@@ -29,6 +35,15 @@ const AddReview: React.FC<AddReviewProps> = ({ id }) => {
       date: new Date().toISOString(),
       id: id,
     });
+
+    setNotification({
+      message: "Review added successfully",
+      type: "success",
+      duration: 3000,
+      onClose: () => {
+        setNotification(null);
+      },
+    });
   };
 
   return (
@@ -36,6 +51,14 @@ const AddReview: React.FC<AddReviewProps> = ({ id }) => {
       onSubmit={handleSubmit}
       className="border border-solid border-b-gray-300 rounded-md p-4 shadow-md bg-blue-50"
     >
+      {notification && (
+        <Notification
+          message={notification.message}
+          type={notification.type}
+          duration={notification.duration ?? 3000}
+          onClose={() => setNotification(null)}
+        />
+      )}
       <h2 className="text-2xl font-semibold text-blue-900 mb-2">
         Add A Review
       </h2>

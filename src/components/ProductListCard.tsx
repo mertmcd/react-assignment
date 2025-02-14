@@ -1,12 +1,10 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Product } from "../types/product";
+import { Product, Review } from "../types/product";
 import SkeletonLoader from "./SkeletonLoader";
 import { RootState } from "../store";
 import { useSelector } from "react-redux";
 import { selectReviewsByProductId } from "../features/reviewSlicer";
-import { Review } from "../types/product";
-
 interface ProductListCardProps {
   product: Product;
 }
