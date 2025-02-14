@@ -23,6 +23,7 @@ const Notification: React.FC<NotificationProps> = ({
 
   return (
     <div
+      data-testid="notification"
       className={`fixed top-4 right-4 w-80 p-4 rounded-lg shadow-lg text-white font-semibold text-sm ${
         type === "success" ? "bg-green-500" : "bg-red-500"
       }`}
