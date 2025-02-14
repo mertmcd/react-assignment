@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { TabsProps } from "../types/tabs";
 
 const Tabs: React.FC<TabsProps> = ({ tabs }) => {

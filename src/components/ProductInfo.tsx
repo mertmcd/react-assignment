@@ -1,3 +1,4 @@
+import React from "react";
 import { Product } from "../types/product";
 interface ProductInfoProps {
   product: Product;
@@ -10,11 +11,11 @@ const ProductInfo: React.FC<ProductInfoProps> = ({ product }) => {
       <p className="text-sm text-gray-500 mt-2">
         <strong>Category:</strong> {product.category} | <strong>Brand:</strong>{" "}
         {product.brand} | <strong>SKU:</strong> {product.sku} |{" "}
-        <strong>Barcode:</strong> {product.meta.barcode}
+        <strong>Barcode:</strong> {product.meta?.barcode}
       </p>
       <div className="mt-3">
         <span className="text-sm font-semibold text-gray-700">Tags:</span>{" "}
-        {product.tags.map((tag, index) => (
+        {product.tags?.map((tag, index) => (
           <span
             key={index}
             className="text-xs bg-gray-200 text-gray-800 px-2 py-1 rounded-md mr-1"
@@ -26,7 +27,7 @@ const ProductInfo: React.FC<ProductInfoProps> = ({ product }) => {
       <p className="text-lg text-gray-600 my-4">{product.description}</p>
 
       <p className="text-2xl font-bold text-blue-600">
-        ${product.price.toFixed(2)} USD
+        ${product.price?.toFixed(2)} USD
       </p>
 
       {(product.discountPercentage ?? 0) > 0 && (
@@ -45,8 +46,8 @@ const ProductInfo: React.FC<ProductInfoProps> = ({ product }) => {
       <br />
 
       <p className="text-sm text-gray-600">
-        <strong>Dimensions:</strong> {product.dimensions.width}cm (W) x{" "}
-        {product.dimensions.height}cm (H) x {product.dimensions.depth}cm (D)
+        <strong>Dimensions:</strong> {product.dimensions?.width}cm (W) x{" "}
+        {product.dimensions?.height}cm (H) x {product.dimensions?.depth}cm (D)
       </p>
       <p className="text-sm text-gray-600">
         <strong>Weight:</strong> {product.weight}g

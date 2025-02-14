@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Product, Review } from "../types/product";
 import ImageSlider from "./ImageSlider";
 import Tabs from "./ProductDetailTabs";
