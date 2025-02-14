@@ -17,7 +17,7 @@ const AddReview: React.FC<AddReviewProps> = ({ id }) => {
 
   const dispatch = useDispatch();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent): void => {
     e.preventDefault();
 
     dispatch(addReview(review));
@@ -32,11 +32,18 @@ const AddReview: React.FC<AddReviewProps> = ({ id }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <div>
+    <form
+      onSubmit={handleSubmit}
+      className="border border-solid border-b-gray-300 rounded-md p-4 shadow-md bg-blue-50"
+    >
+      <h2 className="text-2xl font-semibold text-blue-900 mb-2">
+        Add A Review
+      </h2>
+
+      <div className="m-2">
         <label
           htmlFor="reviewerName"
-          className="block text-sm font-medium text-gray-700"
+          className="block text-sm font-medium text-blue-700"
         >
           Your Name
         </label>
@@ -47,15 +54,15 @@ const AddReview: React.FC<AddReviewProps> = ({ id }) => {
           onChange={(e) =>
             setReview((prev) => ({ ...prev, reviewerName: e.target.value }))
           }
-          className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md"
+          className="block w-full px-4 py-2 border border-blue-300 rounded-md bg-blue-100"
           required
         />
       </div>
 
-      <div>
+      <div className="m-2">
         <label
           htmlFor="rating"
-          className="block text-sm font-medium text-gray-700"
+          className="block text-sm font-medium text-blue-700"
         >
           Rating (1-5)
         </label>
@@ -77,10 +84,10 @@ const AddReview: React.FC<AddReviewProps> = ({ id }) => {
         </div>
       </div>
 
-      <div>
+      <div className="m-2">
         <label
           htmlFor="comment"
-          className="block text-sm font-medium text-gray-700"
+          className="block text-sm font-medium text-blue-700"
         >
           Your Review
         </label>
@@ -90,14 +97,14 @@ const AddReview: React.FC<AddReviewProps> = ({ id }) => {
           onChange={(e) =>
             setReview((prev) => ({ ...prev, comment: e.target.value }))
           }
-          className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md"
+          className="mt-1 block w-full px-4 py-2 border border-blue-300 rounded-md bg-blue-100"
           required
         />
       </div>
 
       <button
         type="submit"
-        className="mt-4 bg-blue-500 text-white px-4 py-2 rounded-md"
+        className="mt-4 bg-blue-500 text-white px-4 py-2 font-semibold rounded-md hover:bg-blue-600"
       >
         Submit Review
       </button>

@@ -5,7 +5,6 @@ import AddReview from "./AddReview";
 import { RootState } from "../store";
 import { useSelector } from "react-redux";
 import { selectReviewsByProductId } from "../features/reviewSlicer";
-
 interface ProductReviewsProps {
   reviews: Review[];
 }
@@ -25,7 +24,7 @@ const ProductReviews: React.FC<ProductReviewsProps> = ({ reviews }) => {
   }, [id, reviews, matchedReviews]);
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-4">
       <h2 className="text-2xl font-semibold text-gray-900">Product Reviews</h2>
       {allReviews.map((review, index) => (
         <div key={index} className="border p-4 rounded-lg shadow">
@@ -39,6 +38,7 @@ const ProductReviews: React.FC<ProductReviewsProps> = ({ reviews }) => {
           <p className="text-gray-600 mt-2">{review.comment}</p>
         </div>
       ))}
+      <hr></hr>
       <AddReview id={productId} />
     </div>
   );

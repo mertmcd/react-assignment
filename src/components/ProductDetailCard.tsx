@@ -35,7 +35,7 @@ const ProductDetailCard: React.FC<ProductDetailCardProps> = ({
   ];
 
   useEffect(() => {
-    const preloadImages = async () => {
+    const preloadImages = async (): Promise<void> => {
       if (product.images && product.images.length > 0) {
         for (const src of product.images) {
           const img = new Image();
