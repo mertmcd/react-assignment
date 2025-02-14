@@ -1,7 +1,8 @@
 {
-  "files": [],
-  "references": [
-    { "path": "./tsconfig.app.json" },
-    { "path": "./tsconfig.node.json" }
-  ]
+  "compilerOptions": {
+    "jsx": "react", // Enable JSX support
+    "esModuleInterop": true, // Optional but recommended for better module imports
+    "moduleResolution": "node", // Ensures correct resolution of modules
+    "strict": true // Recommended for better type safety
+  }
 }

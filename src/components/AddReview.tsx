@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { Review } from "../types/product";
 import { useDispatch } from "react-redux";
 import { addReview } from "../features/reviewSlicer";
@@ -50,6 +50,7 @@ const AddReview: React.FC<AddReviewProps> = ({ id }) => {
     <form
       onSubmit={handleSubmit}
       className="border border-solid border-b-gray-300 rounded-md p-4 shadow-md bg-blue-50"
+      role="form"
     >
       {notification && (
         <Notification
