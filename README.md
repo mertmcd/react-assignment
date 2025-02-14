@@ -1,6 +1,6 @@
 # React + TypeScript + Vite Project
 
-## Installation
+This is a simple E-Commerce React project that uses TypeScript and Vite. It fetches products from a fake API and displays them in a grid. You can go to the product detail page by clicking on a product.
 
 1. **Clone the repository:**
 
@@ -34,6 +34,17 @@ http://localhost:5173
 ```sh
 npm test
 ```
+
+## Technologies Used
+
+- React
+- TypeScript
+- Vite
+- Redux Toolkit
+- React Router
+- Axios
+- Jest
+- React Testing Library
 
 ## Project Structure
 
