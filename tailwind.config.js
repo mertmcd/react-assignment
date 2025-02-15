@@ -1,11 +1,7 @@
 export default {
-  purge: ['./src/**/*.{js,jsx,ts,tsx}'],
-
+  content: ['./src/**/*.{js,jsx,ts,tsx,html}'],
   theme: {
     extend: {},
   },
-  variants: {
-    extend: {},
-  },
   plugins: [],
-}
+};
