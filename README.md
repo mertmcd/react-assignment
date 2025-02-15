@@ -58,8 +58,6 @@ npm test
   - `contexts/` - React contexts directory
   - `features/` - Redux Slice directory
   - `helpers/` - Helper functions directory
-  - `App.tsx` - Main application component
-  - `index.tsx` - Entry point of the application
 
 - `public/` - Public assets directory
 - `vite.config.ts` - Vite configuration file

@@ -19,7 +19,6 @@ const ProductListPage: React.FC = () => {
     const fetch = async (): Promise<void> => {
       setLoading(true);
       const data = await fetchProducts(currentPage, limit);
-      // get data.total to show total products
       setTotalProducts(data.total);
       setProducts(data.products);
       setTotalPages(Math.ceil(data.total / limit));
