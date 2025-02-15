@@ -9,7 +9,7 @@ export interface Product {
   images?: string[];
   stock: number;
   availabilityStatus?: string;
-  discountPercentage?: number;
+  discountPercentage: number;
   warrantyInformation?: string;
   shippingInformation?: string;
   returnPolicy?: string;

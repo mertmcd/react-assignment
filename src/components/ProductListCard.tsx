@@ -16,6 +16,10 @@ const ProductListCard: React.FC<ProductListCardProps> = ({ product }) => {
     selectReviewsByProductId(state, product.id)
   );
 
+  const calculateDiscountedPrice = (price: number, discount: number) => {
+    return (price - price * (discount / 100)).toFixed(2);
+  };
+
   const totalReviewsCount = matchedReviews.length + product.reviews.length;
   const ProductReviews = (product.reviews as Review[]) ?? [];
 
@@ -41,12 +45,25 @@ const ProductListCard: React.FC<ProductListCardProps> = ({ product }) => {
       />
 
       <div className="p-4">
-        <h2 className="text-xl font-semibold text-gray-900 mb-2">
-          {product.title}
-        </h2>
-        <p className="text-lg font-bold text-blue-600 mb-2">
+        <div>
+          <span className="text-xs bg-gray-100 rounded border border-solid border-b-gray-200 p-1 text-center text-gray-600 mr-2">
+            {product.brand}
+          </span>
+          <p className="text-xl font-semibold text-gray-900">{product.title}</p>
+        </div>
+        <p className="text-sm font-bold text-gray-600 mb-2 line-through">
           ${product.price} USD
         </p>
+        {product?.discountPercentage > 0 && (
+          <p className="text-lg text-blue-600 font-semibold">
+            $
+            {calculateDiscountedPrice(
+              product.price,
+              product.discountPercentage
+            )}{" "}
+            USD
+          </p>
+        )}
         <div className="flex items-center mb-2">
           <span className="text-yellow-400 text-lg">
             {"★".repeat(Math.round(totalRating / totalReviewsCount))}

@@ -12,7 +12,7 @@ const Navbar: React.FC = () => {
   };
 
   return (
-    <nav className="bg-blue-600">
+    <nav className="bg-gradient-to-r from-blue-700 to-purple-600">
       <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
         <div className="relative flex items-center justify-between h-16">
           <div className="flex-1 flex items-center sm:items-stretch sm:justify-start">
