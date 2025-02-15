@@ -8,6 +8,7 @@ import Spinner from "../components/Spinner";
 
 const ProductListPage: React.FC = () => {
   const [products, setProducts] = useState<Product[]>([]);
+  const [totalProducts, setTotalProducts] = useState<number>(0);
   const [totalPages, setTotalPages] = useState<number>(0);
   const [loading, setLoading] = useState<boolean>(true);
   const limit = 32;
@@ -18,6 +19,8 @@ const ProductListPage: React.FC = () => {
     const fetch = async (): Promise<void> => {
       setLoading(true);
       const data = await fetchProducts(currentPage, limit);
+      // get data.total to show total products
+      setTotalProducts(data.total);
       setProducts(data.products);
       setTotalPages(Math.ceil(data.total / limit));
       setLoading(false);
@@ -34,8 +37,8 @@ const ProductListPage: React.FC = () => {
   return (
     <div className="min-h-screen bg-white py-8">
       <div className="container mx-auto px-4">
-        <h1 className="text-3xl leading-3 font-extrabold text-gray-900 mb-8">
-          Product List
+        <h1 className="lg:text-2xl text-xl leading-3 font-extrabold text-gray-900 mb-12">
+          Product List ({totalProducts})
         </h1>
 
         {loading ? (
