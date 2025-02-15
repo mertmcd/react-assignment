@@ -46,10 +46,12 @@ const ProductListCard: React.FC<ProductListCardProps> = ({ product }) => {
 
       <div className="p-4">
         <div>
-          <span className="text-xs bg-gray-100 rounded border border-solid border-b-gray-200 p-1 text-center text-gray-600 mr-2">
-            {product.brand}
-          </span>
-          <p className="text-xl font-semibold text-gray-900">{product.title}</p>
+          {product.brand && product.brand.length > 0 && (
+            <span className="text-xs bg-gray-100 rounded border border-solid border-b-gray-200 p-1 text-center text-gray-600 mr-2">
+              {product.brand}
+            </span>
+          )}
+          <p className="text-lg font-semibold text-gray-900">{product.title}</p>
         </div>
         <p className="text-sm font-bold text-gray-600 mb-2 line-through">
           ${product.price} USD

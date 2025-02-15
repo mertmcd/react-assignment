@@ -12,12 +12,12 @@ const Navbar: React.FC = () => {
   };
 
   return (
-    <nav className="bg-gradient-to-r from-blue-700 to-purple-600">
-      <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
+    <nav className="bg-gradient-to-r from-blue-700 to-purple-600 sticky top-0 z-50">
+      <div className=" mx-auto px-2 sm:px-6 lg:px-8">
         <div className="relative flex items-center justify-between h-16">
           <div className="flex-1 flex items-center sm:items-stretch sm:justify-start">
             <div
-              className="text-white text-2xl font-bold cursor-pointer"
+              className="text-white lg:text-2xl text-lg font-bold cursor-pointer"
               onClick={() => navigate("/products")}
             >
               React Assignment

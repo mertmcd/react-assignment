@@ -1,3 +1,4 @@
+import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { AuthProvider } from "./contexts/AuthContext";
 import LoginPage from "./pages/LoginPage";
@@ -10,7 +11,9 @@ const App: React.FC = () => {
   return (
     <AuthProvider>
       <Router>
-        <Navbar />
+        <PrivateRoute>
+          <Navbar />
+        </PrivateRoute>
         <Routes>
           <Route path="/" element={<LoginPage />} />
           <Route
