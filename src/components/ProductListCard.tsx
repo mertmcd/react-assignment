@@ -51,7 +51,9 @@ const ProductListCard: React.FC<ProductListCardProps> = ({ product }) => {
               {product.brand}
             </span>
           )}
-          <p className="text-lg font-semibold text-gray-900">{product.title}</p>
+          <p className="text-lg truncate font-semibold text-gray-900">
+            {product.title}
+          </p>
         </div>
         <p className="text-sm font-bold text-gray-600 mb-2 line-through">
           ${product.price} USD
