@@ -65,3 +65,13 @@ npm test
 - `vite.config.ts` - Vite configuration file
 - `tsconfig.json` - TypeScript configuration file
 - `package.json` - NPM package configuration file
+
+## Screenshots
+
+# Product Listing Page
+
+![PLP Screenshot](./src/assets/screenshots/preview_plp.png)
+
+# Product Detail Page
+
+![PDP Screenshot](./src/assets/screenshots/preview_pdp.png)
