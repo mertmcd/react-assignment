@@ -36,9 +36,15 @@ const ProductListPage: React.FC = () => {
   return (
     <div className="min-h-screen bg-white py-8">
       <div className="container mx-auto px-4">
-        <h1 className="lg:text-2xl text-xl leading-3 font-extrabold text-gray-900 mb-12">
-          Product List ({totalProducts})
-        </h1>
+        {loading ? (
+          <h1 className="lg:text-2xl text-xl leading-3 font-extrabold text-gray-900 mb-12">
+            Loading... Please wait...
+          </h1>
+        ) : (
+          <h1 className="lg:text-2xl text-xl leading-3 font-extrabold text-gray-900 mb-12">
+            Product List ({totalProducts})
+          </h1>
+        )}
 
         {loading ? (
           <div className="flex justify-center items-center min-h-[60vh]">

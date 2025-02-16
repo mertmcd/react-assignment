@@ -45,7 +45,7 @@ const ProductDetailPage: React.FC = () => {
         >
           ← Back to Products
         </button>
-        <h1 className="text-3xl font-bold text-gray-900 mb-8">
+        <h1 className="lg:text-2xl text-xl leading-3 font-extrabold text-gray-900 mb-12">
           {loading ? "Loading..." : ""}
         </h1>
         {!loading && product && (
